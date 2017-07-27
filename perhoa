@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'time'
+require 'yaml'
+
+
+def asset file
+  File.dirname(__FILE__) + '/assets/' + file
+end
+
+#Process.daemon(true,true)
+
+config = YAML.load_file(File.dirname(__FILE__) + '/config.yml')
+
+while true 
+  alarm_time = Time.parse(config["time"])
+  if alarm_time - Time.now > 0 
+    sleep_time = alarm_time - Time.now
+  else
+    sleep_time = alarm_time + (24*60*60) - Time.now
+  end
+  sleep(sleep_time)
+  pid = fork{ exec 'mpg123','-q', asset('alarm.mp3') }
+  sleep 5
+  Process.kill('QUIT', pid)
+end
