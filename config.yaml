@@ -1,0 +1,4 @@
+alarm: 
+  enabled: true
+  time: "21:36"
+  days: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
