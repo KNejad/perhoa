@@ -38,8 +38,9 @@ end
 
 def read_arguments arguments 
   arguments.each do |argument| 
-    Process.daemon(true, false) if argument == '--daemon'
-    quit if argument == '--quit'
+    printf("Received message: %s\n", argument)
+    Process.daemon(true, false) if argument == 'daemon'
+    quit if argument == 'quit'
   end
 end
 

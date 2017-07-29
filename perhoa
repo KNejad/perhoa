@@ -1,22 +1,16 @@
 #!/usr/bin/env ruby
 
 require 'socket'
-require 'json'
 require 'fileutils'
 require 'time'
 require 'yaml'
-require 'pry' 
 
-require_relative 'helper'
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
 
-CONFIG_FILE = ENV['HOME'] + '/.config/perhoa/config.yaml'
+config_file = ENV['HOME'] + '/.config/perhoa/config.yaml'
+config_file = File.file?(config_file) ? config_file :  'config.example.yaml'
 
-if File.file?(CONFIG_FILE)
-  $config = symbolise(YAML.load_file(CONFIG_FILE))
-else
-  $config = symbolise(YAML.load_file('config.example.yaml'))
-end
+$config = symbolise(YAML.load_file(config_file))
 
 if already_running? 
   puts 'Sending messages to running Perhoa process...'

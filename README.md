@@ -7,11 +7,12 @@ PERsonal HOme Assistant written in Ruby
 ## Usage
 All configuration is in the `~/.config/perhoa/config.yaml` file
 
-For sane defaults copy the `config.sample.yaml` to `~/.config/perhoa/config.yaml`
+For sane defaults copy `config.sample.yaml` to `~/.config/perhoa/config.yaml`
 
 ### Alarm
 
 To setup an alarm add the following to the config file:
+
 ```
 alarm: 
   Alarm Name:
@@ -19,6 +20,8 @@ alarm:
     time: "14:47"
     days: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 ```
+
+`Alarm Name`: The name of the alarm
 
 `enabled`: Toggles the alarm status. `true` or `false`
 
@@ -30,6 +33,6 @@ alarm:
 
 You can start `Perhoa` and pass command line arguments or you can run Perhoa with arguments whilst another instance of Perhoa is already running. In the latter case the arguments will be passed to the already running perhoa instance.
 
-`--daemon`: Runs Perhoa in the background
+`daemon`: Runs Perhoa in the background
 
-`--quit`: Quits Perhoa
+`quit`: Quits Perhoa
