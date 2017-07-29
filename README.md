@@ -1,13 +1,13 @@
 # Perhoa
 PERsonal HOme Assistant written in Ruby
 
-## Dependencies: 
+## Dependencies
   * mpg123
 
 ## Usage
 All configuration is in the `~/.config/perhoa/config.yaml` file
 
-For sane defaults copy `config.sample.yaml` to `~/.config/perhoa/config.yaml`
+To edit the default configuration, copy `config.sample.yaml` to `~/.config/perhoa/config.yaml`
 
 ### Alarm
 
@@ -27,11 +27,11 @@ alarm:
 
 `time`: The time the alarm will run. Either a string or a list of strings for the alarm times.
 
-`days`: The days the alarm should run. Either a string or a list of strings for the alarm days. Where the day is the first 3 letters in the week day name
+`days`: The days the alarm should run. Either a string or a list of strings for the alarm days.
 
-### Command line arguments:
+### Command line arguments
 
-You can start `Perhoa` and pass command line arguments or you can run Perhoa with arguments whilst another instance of Perhoa is already running. In the latter case the arguments will be passed to the already running perhoa instance.
+You can start Perhoa and pass command line arguments directly, or you can run Perhoa with arguments whilst another instance of Perhoa is already running. In the latter case the arguments will be passed to the already running perhoa instance.
 
 `daemon`: Runs Perhoa in the background
 

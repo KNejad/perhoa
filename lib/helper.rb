@@ -39,7 +39,7 @@ end
 def read_arguments arguments 
   arguments.each do |argument| 
     printf("Received message: %s\n", argument)
-    Process.daemon(true, false) if argument == 'daemon'
+    daemon if argument == 'daemon'
     quit if argument == 'quit'
   end
 end
@@ -51,4 +51,9 @@ end
 def quit 
   puts 'Terminated via socket'
   exit 
+end
+
+def daemon
+  puts "Running as daemon"
+  Process.daemon(true, false) 
 end
