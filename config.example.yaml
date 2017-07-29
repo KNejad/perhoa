@@ -1,5 +1,0 @@
-alarm: 
-  Alarm Name: 
-    enabled: false
-    time: "22:00"
-    day: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]

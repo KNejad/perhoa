@@ -1,13 +1,14 @@
 # Perhoa
+
 PERsonal HOme Assistant written in Ruby
 
 ## Dependencies
   * mpg123
 
 ## Usage
-All configuration is in the `~/.config/perhoa/config.yaml` file
 
-To edit the default configuration, copy `config.sample.yaml` to `~/.config/perhoa/config.yaml`
+The default configuration file is `~/.config/perhoa/config.yaml`
+
 
 ### Alarm
 
