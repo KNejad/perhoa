@@ -55,7 +55,6 @@ end
 
 def read_arguments arguments 
   arguments.each do |argument| 
-    puts 'Hello' if argument == '--hello'
     Process.daemon(true, false) if argument == '--daemon'
     quit if argument == '--quit'
   end

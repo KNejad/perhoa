@@ -14,14 +14,11 @@ CONFIG_FILE = ENV['HOME'] + '/.config/perhoa/config.yaml'
 if File.file?(CONFIG_FILE)
   $config = symbolise(YAML.load_file(CONFIG_FILE))
 else
-  puts 'No config file found. Running sample config file'
-  puts 'Copy config.example.yaml to ~/.config/perhoa/config.yaml'
   $config = symbolise(YAML.load_file('config.example.yaml'))
 end
 
 if already_running? 
-  puts 'Perhoa is already running'
-  puts 'Sending messages to running Perhoa'
+  puts 'Sending messages to running Perhoa process...'
   send_message
   exit
 end
