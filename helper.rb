@@ -44,7 +44,7 @@ def read_arguments arguments
 end
 
 def read_config
-  alarm if $config[:alarm][:enabled]
+  Alarm.new($config[:alarm]) if $config[:alarm]
 end
 
 def quit 

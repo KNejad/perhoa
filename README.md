@@ -14,9 +14,10 @@ For sane defaults copy the `config.sample.yaml` to `~/.config/perhoa/config.yaml
 To setup an alarm add the following to the config file:
 ```
 alarm: 
-  enabled: true
-  time: "14:47"
-  days: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+  Alarm Name:
+    enabled: true
+    time: "14:47"
+    days: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 ```
 
 `enabled`: Toggles the alarm status. `true` or `false`
