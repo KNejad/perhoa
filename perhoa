@@ -6,9 +6,10 @@ require 'fileutils'
 require 'time'
 require 'yaml'
 require 'pry' 
+
 require_relative 'helper'
 
-config = symbolizse(YAML.load_file(File.dirname(__FILE__) + '/config.yaml'))
+config = symbolise(YAML.load_file(File.dirname(__FILE__) + '/config.yaml'))
 
 if already_running? 
   if ARGV.include? '--daemon' or ARGV.length.zero?
@@ -18,13 +19,9 @@ if already_running?
   send_message
 end
 
-run_socket 
 
-if ARGV.include? '--daemon' or config[:daemon]
-  Process.daemon(true, false)
-end
+Process.daemon(true, false) if ARGV.include? '--daemon' or config[:daemon]
 
-if config[:alarm][:enabled]
-  alarm config[:alarm]
-end
+alarm config[:alarm] if config[:alarm][:enabled]
 
+run_socket

@@ -1,10 +1,12 @@
+SOCKET_FILE = "/tmp/perhoa.sock"
+
 def asset file
   File.dirname(__FILE__) + '/assets/' + file
 end
 
 
 def alarm config
-  current = Thread.new do
+  Thread.new do
     alarm_time = Time.parse(config[:time])
     if alarm_time - Time.now > 0 
       sleep_time = alarm_time - Time.now
@@ -17,47 +19,42 @@ def alarm config
     sleep 5
     Process.kill('QUIT', pid)
   end
-  current.join
-  alarm config 
 end
 
-def symbolizse hash
+def symbolise hash
   hash.keys.each do |key|
     hash[key.to_sym] = hash[key]
     hash.delete(key)
     if hash[key.to_sym].is_a?(Hash)
-      symbolizse hash[key.to_sym]
+      symbolise hash[key.to_sym]
     end
   end
   return hash
 end
 
 def run_socket 
-  Thread.new do 
-    socket_path = "/tmp/perhoa.sock"
 
-    at_exit { FileUtils.rm socket_path }
+  at_exit { FileUtils.rm SOCKET_FILE }
 
-    server = UNIXServer.new socket_path
+  server = UNIXServer.new SOCKET_FILE
 
-    loop do
-      client = server.accept
-      message = client.read
-      case 
-      when message.include?('--quit')
-        puts 'Terminated via socket'
-        exit
-      end
+  loop do
+    client = server.accept
+    message = client.read
+    case 
+    when message.include?('--quit')
+      puts 'Terminated via socket'
+      exit
     end
   end
 end
 
 def already_running? 
-  File.socket?('/tmp/perhoa.sock')
+  File.socket?(SOCKET_FILE)
 end
 
 def send_message
-  client = UNIXSocket.open "/tmp/perhoa.sock"
+  client = UNIXSocket.open SOCKET_FILE
   client.print ARGV
   client.close
   exit
