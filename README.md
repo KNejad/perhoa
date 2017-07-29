@@ -5,7 +5,7 @@ PERsonal HOme Assistant written in Ruby
   * mpg123
 
 ## Usage
-The default configuration file location `~/.config/perhoa/config.yaml`
+The default configuration file location is `~/.config/perhoa/config.yaml`
 
 
 ### Alarm
