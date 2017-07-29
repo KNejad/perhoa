@@ -10,7 +10,7 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
 config_file = ENV['HOME'] + '/.config/perhoa/config.yaml'
 config_file = File.file?(config_file) ? config_file :  'config.example.yaml'
 
-$config = symbolise(YAML.load_file(config_file))
+$config = File.zero?(config_file) ? {} : symbolise(YAML.load_file(config_file))
 
 if already_running? 
   puts 'Sending messages to running Perhoa process...'
