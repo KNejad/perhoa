@@ -30,4 +30,5 @@ alarm:
 You can start `Perhoa` and pass command line arguments or you can run Perhoa with arguments whilst another instance of Perhoa is already running. In the latter case the arguments will be passed to the already running perhoa instance.
 
 `--daemon`: Runs Perhoa in the background
+
 `--quit`: Quits Perhoa
