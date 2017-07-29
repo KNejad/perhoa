@@ -7,7 +7,7 @@ PERsonal HOme Assistant written in Ruby
 ## Usage
 All configuration is in the `~/.config/perhoa/config.yaml` file
 
-For sane defaults copy the `config.sample.yaml` to to `~/.config/perhoa/config.yaml`
+For sane defaults copy the `config.sample.yaml` to `~/.config/perhoa/config.yaml`
 
 ### Alarm
 

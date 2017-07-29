@@ -8,6 +8,7 @@ require 'yaml'
 require 'pry' 
 
 require_relative 'helper'
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
 
 CONFIG_FILE = ENV['HOME'] + '/.config/perhoa/config.yaml'
 
@@ -24,7 +25,5 @@ if already_running?
 end
 
 read_arguments ARGV
-
 read_config
-
 run_socket
