@@ -5,11 +5,11 @@ def asset file
 end
 
 
-def alarm config
+def alarm
   Thread.new do
-    alarm_time = Time.parse(config[:time])
+    alarm_time = Time.parse($config[:alarm][:time])
     alarm_time += (24*60*60) if alarm_time - Time.now < 0 
-    
+
     sleep_time = alarm_time - Time.now
     puts "Alarm set for " + alarm_time.to_s
     sleep(sleep_time)
@@ -38,12 +38,8 @@ def run_socket
 
   loop do
     client = server.accept
-    message = client.read
-    case 
-    when message.include?('--quit')
-      puts 'Terminated via socket'
-      exit
-    end
+    arguments = YAML.load(client.read)
+    read_arguments arguments
   end
 end
 
@@ -53,7 +49,23 @@ end
 
 def send_message
   client = UNIXSocket.open SOCKET_FILE
-  client.print ARGV
+  client.print ARGV.to_yaml
   client.close
-  exit
+end
+
+def read_arguments arguments 
+  arguments.each do |argument| 
+    puts 'Hello' if argument == '--hello'
+    Process.daemon(true, false) if argument == '--daemon'
+    quit if argument == '--quit'
+  end
+end
+
+def read_config
+  alarm if $config[:alarm][:enabled]
+end
+
+def quit 
+  puts 'Terminated via socket'
+  exit 
 end

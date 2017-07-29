@@ -12,24 +12,22 @@ require_relative 'helper'
 CONFIG_FILE = ENV['HOME'] + '/.config/perhoa/config.yaml'
 
 if File.file?(CONFIG_FILE)
-  config = symbolise(YAML.load_file(CONFIG_FILE))
+  $config = symbolise(YAML.load_file(CONFIG_FILE))
 else
-  puts "No config file found. Running sample config file"
-  puts "Copy config.example.yaml to ~/.config/perhoa/config.yaml"
-  config = symbolise(YAML.load_file('config.example.yaml'))
+  puts 'No config file found. Running sample config file'
+  puts 'Copy config.example.yaml to ~/.config/perhoa/config.yaml'
+  $config = symbolise(YAML.load_file('config.example.yaml'))
 end
 
 if already_running? 
-  if ARGV.include? '--daemon' or ARGV.length.zero?
-    puts 'Perhoa is already running'
-    exit
-  end
+  puts 'Perhoa is already running'
+  puts 'Sending messages to running Perhoa'
   send_message
+  exit
 end
 
+read_arguments ARGV
 
-Process.daemon(true, false) if ARGV.include? '--daemon' or config[:daemon]
-
-alarm config[:alarm] if config[:alarm][:enabled]
+read_config
 
 run_socket
