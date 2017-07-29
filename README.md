@@ -18,7 +18,7 @@ alarm:
   Alarm Name:
     enabled: true
     time: "14:47"
-    days: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+    day: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 ```
 
 `Alarm Name`: The name of the alarm
@@ -27,7 +27,7 @@ alarm:
 
 `time`: The time the alarm will run. Either a string or a list of strings for the alarm times.
 
-`days`: The days the alarm should run. Either a string or a list of strings for the alarm days.
+`day`: The day the alarm should run. Either a string or a list of strings for the alarm days.
 
 ### Command line arguments
 
