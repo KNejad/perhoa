@@ -1,7 +1,7 @@
 SOCKET_FILE = "/tmp/perhoa.sock"
 
 def asset file
-  File.dirname(__FILE__) + '/assets/' + file
+  File.join(File.dirname(__FILE__), '../assets/' + file)
 end
 
 def symbolise hash

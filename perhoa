@@ -2,7 +2,6 @@
 
 require 'socket'
 require 'fileutils'
-require 'time'
 require 'yaml'
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
