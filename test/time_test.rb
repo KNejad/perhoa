@@ -5,22 +5,24 @@ require_relative '../lib/alarm.rb'
 describe Alarm do
   def test_alarm_set_for_1_minute_from_now
     now = DateTime.now  
-    alarm_time = DateTime.new(now.year, 
-                              now.month,
-                              now.day,
-                              now.hour,
-                              now.minute + 1,
-                              now.second,
-                              now.zone)
+    alarm_1 = DateTime.new(
+      now.year,
+      now.month,
+      now.day,
+      now.hour,
+      now.minute + 1,
+      now.second,
+      now.zone
+    )
     config = { 
       "name": {
         enabled: true,
-        time: alarm_time.strftime("%H:%M:%S"),
-        day: alarm_time.strftime('%a')
+        time: alarm_1.strftime("%H:%M:%S"),
+        day: alarm_1.strftime('%a')
       }
     }
 
-    alarm_output = "Alarm 'name' set for "  +  alarm_time.strftime('%a %Y-%m-%d at %H:%M:%S') + "\n"
+    alarm_output = "Alarm 'name' set for "  +  alarm_1.strftime('%a %Y-%m-%d at %H:%M:%S') + "\n"
     date_stubs do
       assert_output(alarm_output) { Alarm.new(config) }
     end
@@ -28,13 +30,15 @@ describe Alarm do
 
   def test_multiple_alarms
     now = DateTime.now  
-    alarm_1 = DateTime.new(now.year, 
-                              now.month,
-                              now.day,
-                              now.hour,
-                              now.minute + 1,
-                              now.second,
-                              now.zone)
+    alarm_1 = DateTime.new(
+      now.year,
+      now.month,
+      now.day,
+      now.hour,
+      now.minute + 1,
+      now.second,
+      now.zone
+    )
     alarm_2 = alarm_1 + 1
     config = { 
       "alarm 1": {
@@ -60,13 +64,15 @@ describe Alarm do
 
   def test_disabled_alarm
     now = DateTime.now  
-    alarm_1 = DateTime.new(now.year, 
-                              now.month,
-                              now.day,
-                              now.hour,
-                              now.minute + 1,
-                              now.second,
-                              now.zone)
+    alarm_1 = DateTime.new(
+      now.year,
+      now.month,
+      now.day,
+      now.hour,
+      now.minute + 1,
+      now.second,
+      now.zone
+    )
     config = { 
       "alarm 1": {
         enabled: false,
@@ -76,6 +82,31 @@ describe Alarm do
     }
 
     alarm_output = ""
+    date_stubs do
+      assert_output(alarm_output) { Alarm.new(config) }
+    end
+  end
+
+  def test_multiple_dates
+    date = DateTime.now
+    time = Time.now
+    times = [
+      (time - 60).strftime("%H:%M:%S"),
+      time.strftime("%H:%M:%S"),
+      (time + 60).strftime("%H:%M:%S"),
+    ]
+    config = {
+      "alarm 1": {
+        enabled: true,
+        time: times,
+        day: date.strftime('%a')
+      }
+    }
+
+    alarm_output =
+      "Alarm 'alarm 1' set for "  +  (date + 7).strftime('%a %Y-%m-%d') + " at " + times[0] + "\n" +
+      "Alarm 'alarm 1' set for "  +  (date + 7).strftime('%a %Y-%m-%d') + " at " + times[1] + "\n" +
+      "Alarm 'alarm 1' set for "  +  date.strftime('%a %Y-%m-%d') + " at " + times[2] + "\n"
     date_stubs do
       assert_output(alarm_output) { Alarm.new(config) }
     end
