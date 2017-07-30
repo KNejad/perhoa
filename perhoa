@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'socket'
 require 'fileutils'
 require 'yaml'
 
@@ -16,6 +15,6 @@ if already_running?
   exit
 end
 
-read_arguments ARGV
 read_config
-run_socket
+listener = SocketListener.new(ARGV)
+listener.listen
