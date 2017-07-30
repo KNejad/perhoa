@@ -3,25 +3,36 @@ require_relative '../lib/alarm.rb'
 
 
 describe Alarm do
-  def test_alarm_set_for_mon_at_2
+  def test_alarm_set_for_1_minute_from_now
+    now = DateTime.now  
+    alarm_time = DateTime.new(now.year, 
+                              now.month,
+                              now.day,
+                              now.hour,
+                              now.minute + 1,
+                              now.second,
+                              now.zone)
     config = { 
       "name": {
         enabled: true,
-        time: "23:59:59",
-        day: "mon"
+        time: alarm_time.strftime("%H:%M:%S"),
+        day: alarm_time.strftime('%a')
       }
     }
-    date  = Date.parse("Monday")
-    delta = date >= Date.today ? 0 : 7
-    date + delta
-    date_string = date.strftime('%Y-%m-%d')
-    Thread.stub(:new, nil) do
-      Kernel.stub(:loop, nil) do
-        Kernel.stub(:sleep, nil) do
-          Kernel.stub(:exec, nil) do 
-            alarm_output = "Alarm 'name' set for Mon "+ date_string + " at 23:59:59\n"
-            assert_output(alarm_output) { Alarm.new(config) }
-          end
+
+    alarm_output = "Alarm 'name' set for "  +  alarm_time.strftime('%a %Y-%m-%d at %H:%M:%S') + "\n"
+    date_stubs do
+      assert_output(alarm_output) { Alarm.new(config) }
+    end
+  end
+end
+
+def date_stubs 
+  Thread.stub(:new, nil) do
+    Kernel.stub(:loop, nil) do
+      Kernel.stub(:sleep, nil) do
+        Kernel.stub(:exec, nil) do 
+          yield
         end
       end
     end
