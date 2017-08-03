@@ -22,11 +22,9 @@ end
 
 
 def send_messages_to_socket messages
-  capture_stdout do
-    messages = messages.join(' ') if messages.is_a?(Array)
-    fork do
-      Kernel.exec './perhoa ' +  messages + '> /dev/null'
-    end
+  messages = messages.join(' ') if messages.is_a?(Array)
+  fork do
+    Kernel.exec './perhoa ' +  messages + '> /dev/null'
   end
 end
 
