@@ -24,7 +24,8 @@ end
 def send_messages_to_socket messages
   messages = messages.join(' ') if messages.is_a?(Array)
   fork do
-    Kernel.exec './perhoa ' +  messages + '> /dev/null'
+    Kernel.exec File.join(File.dirname(__FILE__), '../bin/perhoa') + ' ' +  messages + '> /dev/null'
+
   end
 end
 
