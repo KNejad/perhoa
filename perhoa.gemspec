@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.summary      = "Personal Home Assistent"
   s.description  = "A personal home assistent to help wake you up, remind you of things to do, and more things to come"
   s.author       = 'Keeyan Nejad'
-  s.files        = ['lib/perhoa.rb', 'lib/helper.rb', 'lib/alarm.rb', 'lib/socket_listener.rb', 'assets/alarm.mp3']
+  s.files = Dir['Rakefile', '{bin,lib,assets,test}/**/*', 'README*', 'LICENSE*'] & `git ls-files -z`.split("\0")
   s.email        = 'keeyan@knejad.co.uk'
   s.homepage     = 'https://github.com/KNejad/perhoa'
   s.license      = 'AGPL-3.0'
